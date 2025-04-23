@@ -1,0 +1,50 @@
+<div>
+  <h2>Список пациентов</h2>  
+  <!-- Таблица с пациентами -->
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">ID</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">ФИО</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Дата рождения</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Палата</th>
+      </tr>
+    </thead>
+    <!-- <tbody>
+      <tr *ngFor="let patient of patients" style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.id }}</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.full_name }}</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.birth_date }}</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.palata }}</td>
+      </tr>
+    </tbody> -->
+
+    <!-- <tbody>
+      <ng-container *ngFor="let patient of patients">
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td>{{ patient.id }}</td>
+          <td>{{ patient.full_name }}</td>
+          <td>{{ patient.birth_date }}</td>
+          <td>{{ patient.palata }}</td>
+        </tr>
+      </ng-container>
+    </tbody> -->
+
+
+    <tbody>
+      @for (patient of patients; track patient.id) {
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td>{{ patient.id }}</td>
+          <td>{{ patient.fullName }}</td>
+          <td>{{ patient.birthDate }}</td>
+          <td>{{ patient.palata }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4">Нет данных</td>
+        </tr>
+      }
+    </tbody>
+
+  </table>
+</div>
