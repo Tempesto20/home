@@ -1,6 +1,5 @@
-<div>
+<!-- <div>
   <h2>Список пациентов</h2>  
-  <!-- Таблица с пациентами -->
   <table style="width: 100%; border-collapse: collapse;">
     <thead>
       <tr style="background-color: #f2f2f2;">
@@ -10,27 +9,6 @@
         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Палата</th>
       </tr>
     </thead>
-    <!-- <tbody>
-      <tr *ngFor="let patient of patients" style="border-bottom: 1px solid #ddd;">
-        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.id }}</td>
-        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.full_name }}</td>
-        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.birth_date }}</td>
-        <td style="padding: 10px; border: 1px solid #ddd;">{{ patient.palata }}</td>
-      </tr>
-    </tbody> -->
-
-    <!-- <tbody>
-      <ng-container *ngFor="let patient of patients">
-        <tr style="border-bottom: 1px solid #ddd;">
-          <td>{{ patient.id }}</td>
-          <td>{{ patient.full_name }}</td>
-          <td>{{ patient.birth_date }}</td>
-          <td>{{ patient.palata }}</td>
-        </tr>
-      </ng-container>
-    </tbody> -->
-
-
     <tbody>
       @for (patient of patients; track patient.id) {
         <tr style="border-bottom: 1px solid #ddd;">
@@ -47,4 +25,68 @@
     </tbody>
 
   </table>
+</div> -->
+
+
+
+
+
+
+<div class="patients-container">
+  <h2>Список пациентов</h2>
+  
+  <!-- Кнопка обновления -->
+  <button mat-raised-button color="primary" (click)="refresh()">
+    Обновить список
+  </button>
+
+  <!-- Индикатор загрузки -->
+  @if (patients === null) {
+    <div class="loading-spinner">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Загрузка данных...</p>
+    </div>
+  }
+  @else {
+    <!-- Таблица пациентов -->
+    <table mat-table [dataSource]="patients" class="mat-elevation-z8">
+      <!-- Колонка ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let patient">{{ patient.id }}</td>
+      </ng-container>
+
+      <!-- Колонка ФИО -->
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef>ФИО</th>
+        <td mat-cell *matCellDef="let patient">{{ patient.fullName }}</td>
+      </ng-container>
+
+      <!-- Колонка Дата рождения -->
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef>Дата рождения</th>
+        <td mat-cell *matCellDef="let patient">
+          {{ patient.birthDate | date:'dd.MM.yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- Колонка Палата -->
+      <ng-container matColumnDef="palata">
+        <th mat-header-cell *matHeaderCellDef>Палата</th>
+        <td mat-cell *matCellDef="let patient">{{ patient.palata }}</td>
+      </ng-container>
+
+      <!-- Заголовок таблицы -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Строки данных -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Пустая таблица -->
+      @if (patients && patients.length === 0) {
+        <tr class="no-data-row">
+          <td colspan="4">Нет данных о пациентах</td>
+        </tr>
+      }
+    </table>
+  }
 </div>

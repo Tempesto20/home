@@ -1,18 +1,17 @@
 // import { Component } from '@angular/core';
-// // import { RouterOutlet } from '@angular/router';
+// import { RouterOutlet } from '@angular/router';
 
 // @Component({
 //   selector: 'app-root',
-//   // imports: [RouterOutlet],
-//   templateUrl: './app.component.html',
-//   // template: '<div>Test patients component</div>', // Временно упрощенный шаблон
-//   styleUrl: './app.component.scss'
+//   standalone: true,
+//   imports: [RouterOutlet],
+//   template: `<router-outlet></router-outlet>`
 // })
 // export class AppComponent {
-//   title = 'frontend';
+//   title(title: any) {
+//     throw new Error('Method not implemented.');
+//   }
 // }
-
-
 
 
 import { Component } from '@angular/core';
@@ -20,12 +19,22 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>`
+  standalone: true, // Указываем, что это standalone компонент
+  imports: [RouterOutlet], // Импортируем только необходимые директивы
+  template: `
+    <!-- Основной layout приложения -->
+    <div class="app-container">
+      <router-outlet></router-outlet>
+    </div>
+  `,
+  styles: [`
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  `]
 })
 export class AppComponent {
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
+  // Базовый компонент приложения не требует сложной логики
 }
