@@ -15,10 +15,11 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http'; // Новый способ предоставления HttpClient
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), // Настройка маршрутизации
-    provideHttpClient()    // Предоставление HttpClient для всего приложения
-    provideAnimations() // Добавляем анимации
+    provideHttpClient(),    // Предоставление HttpClient для всего приложения
+    provideAnimations() // Добавьте эту строку
   ]
 };
